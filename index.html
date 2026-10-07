@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Quest Journal — Notes Visualizer</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="vignette"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="rune">◆</span>
+    <h1>Quest Journal</h1>
+  </div>
+  <div class="source" id="sourceInfo">
+    <span class="src-label">Source</span>
+    <span class="src-name" id="srcName">No document connected</span>
+  </div>
+  <div class="actions">
+    <button id="btnConnect" class="btn primary" title="Connect a Word (.docx), Markdown or text file">Connect Document</button>
+    <button id="btnRefresh" class="btn" title="Re-read the connected document" disabled>Refresh</button>
+    <button id="btnSample" class="btn" title="Load built-in demo quests">Demo</button>
+    <button id="btnHelp" class="btn ghost" title="How to format your notes">?</button>
+  </div>
+</header>
+
+<main class="journal">
+  <!-- Quest list -->
+  <section class="panel quests">
+    <div class="panel-head">
+      <input id="search" class="search" type="search" placeholder="Search quests, objectives, tags…" />
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-filter="active">Active</button>
+      <button class="tab" data-filter="completed">Completed</button>
+      <button class="tab" data-filter="all">All</button>
+    </nav>
+    <ul class="quest-list" id="questList"></ul>
+    <div class="panel-foot" id="listStats"></div>
+  </section>
+
+  <!-- Quest detail -->
+  <section class="panel detail" id="detail">
+    <div class="empty" id="emptyState">
+      <div class="emblem">❖</div>
+      <h2>No quest selected</h2>
+      <p>Connect a Word document to populate your journal, or load the demo to see how notes become quests.</p>
+    </div>
+  </section>
+
+  <!-- Quest line map -->
+  <section class="panel map">
+    <div class="panel-head"><h3>Quest Line</h3></div>
+    <div class="map-body" id="mapBody"></div>
+  </section>
+</main>
+
+<dialog id="helpDlg" class="dlg">
+  <h2>Writing notes the journal understands</h2>
+  <p>Use normal Word styles. Nothing else required.</p>
+  <ul class="help">
+    <li><b>Heading 1</b> → a Quest</li>
+    <li><b>Heading 2</b> → a Stage / sub-quest</li>
+    <li><b>Bullet or numbered list item</b> → an Objective</li>
+    <li>Plain paragraph under a heading → description text</li>
+  </ul>
+  <p class="hint">Markers you can sprinkle anywhere:</p>
+  <ul class="help">
+    <li><code>[x]</code>, <code>[done]</code> or <code>✓</code> at the start of an objective → completed</li>
+    <li><code>(optional)</code> → optional objective</li>
+    <li><code>@Location</code> → place chip &nbsp;•&nbsp; <code>#tag</code> → tag chip</li>
+    <li><code>Type:</code> Main / Side / Faction / Misc &nbsp;•&nbsp; <code>Level:</code>, <code>Giver:</code>, <code>Location:</code>, <code>Reward:</code>, <code>Requires:</code></li>
+    <li><code>Requires: Other Quest Name</code> → draws the quest line</li>
+  </ul>
+  <p class="hint">Markdown / plain text works too: <code>#</code>, <code>##</code>, <code>-</code>, <code>- [x]</code>.</p>
+  <div class="dlg-foot"><button class="btn" id="helpClose">Close</button></div>
+</dialog>
+
+<script src="docx.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
